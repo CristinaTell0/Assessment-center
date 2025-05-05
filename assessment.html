@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Assessment Center</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f8fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #800080;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .definition {
+      max-width: 700px;
+      background: #ffffff;
+      padding: 25px;
+      border: 2px solid #e0d4f7;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(128,0,128,0.1);
+      margin-bottom: 30px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #800080;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a64ca6;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      background-color: white;
+      padding: 30px;
+      border: 3px solid black;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Evaluación competencial</h1>
+
+  <div class="definition">
+    <p>
+      Implica el obrar en el punto medio en cualquier situación, entendiendo por punto medio una actitud permanente de vencer el temor y huir de la temeridad. No se trata de alardes de fuerza física o de otro tipo; por el contrario, se relaciona con valores como la prudencia y la sensatez para tomar el punto medio de las distintas circunstancias sin caer en la tentación de actuar como todopoderoso o, por el contrario, como timorato.
+    </p>
+  </div>
+
+  <select id="respuesta">
+    <option value="">Selecciona una competencia...</option>
+    <option value="orientación al cliente">Orientación al cliente</option>
+    <option value="compromiso">Compromiso</option>
+    <option value="fortaleza">Fortaleza</option>
+    <option value="liderazgo">Liderazgo</option>
+  </select>
+  <br>
+  <button onclick="verificar()">Verificar</button>
+
+  <div id="overlay"></div>
+
+  <!-- Éxito -->
+  <div class="popup" id="popupCorrecto">
+    <h2 class="success">¡Enhorabuena!</h2>
+    <p>Pasas a la siguiente prueba.</p>
+    <button onclick="location.href='prueba2.html'">Ir a Prueba 2</button>
+  </div>
+
+  <!-- Error -->
+  <div class="popup" id="popupError">
+    <h2 class="error">¡Vuelve a intentarlo!</h2>
+    <button onclick="cerrarError()">Cerrar</button>
+  </div>
+
+  <script>
+    function verificar() {
+      const seleccion = document.getElementById("respuesta").value;
+      const correcto = "fortaleza";
+
+      if (seleccion.toLowerCase() === correcto) {
+        document.getElementById("respuesta").disabled = true;
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("popupCorrecto").style.display = "block";
+      } else {
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("popupError").style.display = "block";
+      }
+    }
+
+    function cerrarError() {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("popupError").style.display = "none";
+    }
+  </script>
+</body>
+</html>
